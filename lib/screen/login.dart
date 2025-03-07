@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koperasi/screen/daftar.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -56,7 +57,6 @@ class LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 32.0),
                 Text("Selamat Datang Kembali!",
                     style: TextStyle(
-                      fontFamily: 'Montserrat',
                       fontSize: 36,
                       color: Color.fromRGBO(2, 62, 138, 1),
                       fontWeight: FontWeight.w700,
@@ -64,7 +64,6 @@ class LoginScreenState extends State<LoginScreen> {
                 Text(
                     "Senang melihat Anda lagi. Masukkan akun Anda untuk melanjutkan.",
                     style: TextStyle(
-                      fontFamily: 'Montserrat',
                       fontSize: 12,
                       color: Colors.black,
                     )),
@@ -72,7 +71,6 @@ class LoginScreenState extends State<LoginScreen> {
                 Text("Email",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'Montserrat',
                       fontSize: 12,
                       color: Colors.black,
                       fontWeight: FontWeight.w700,
@@ -87,7 +85,6 @@ class LoginScreenState extends State<LoginScreen> {
                 Text("Password",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'Montserrat',
                       fontSize: 12,
                       color: Colors.black,
                       fontWeight: FontWeight.w700,
@@ -104,7 +101,6 @@ class LoginScreenState extends State<LoginScreen> {
                 ),
                 Text("Lupa kata sandi?",
                     style: TextStyle(
-                      fontFamily: 'Montserrat',
                       fontSize: 12,
                       color: Colors.black,
                     )),
@@ -122,7 +118,6 @@ class LoginScreenState extends State<LoginScreen> {
                         'Masuk',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontFamily: "Montserrat",
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
                         ),
@@ -136,7 +131,6 @@ class LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text("Belum punya akun ?",
                         style: TextStyle(
-                          fontFamily: 'Montserrat',
                           fontSize: 12,
                           color: Colors.black,
                         )),
@@ -144,10 +138,12 @@ class LoginScreenState extends State<LoginScreen> {
                       width: 5,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Daftar()));
+                      },
                       child: Text("Daftar",
                           style: TextStyle(
-                              fontFamily: 'Montserrat',
                               fontSize: 12,
                               color: Color.fromRGBO(17, 59, 175, 1),
                               decoration: TextDecoration.underline,
