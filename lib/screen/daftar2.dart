@@ -1,16 +1,32 @@
-import 'package:flutter/material.dart';
-import 'package:koperasi/class/warna.dart';
-import 'package:koperasi/screen/daftar2.dart';
+import 'dart:typed_data';
 
-class Daftar extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image_picker/image_picker.dart' as im;
+import 'package:koperasi/class/warna.dart';
+
+class Daftar2 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return DaftarState();
+    return Daftar2State();
   }
 }
 
-class DaftarState extends State<Daftar> {
+class Daftar2State extends State<Daftar2> {
+  im.ImagePicker image = im.ImagePicker();
+  Uint8List pickedImage = Uint8List(0);
+  bool photoTaken = false;
   String jenisKelamin = 'Wanita';
+  Future<Uint8List> testComporessList(Uint8List list) async {
+    var result = await FlutterImageCompress.compressWithList(
+      list,
+      quality: 56,
+    );
+    print(list.length);
+    print(result.length);
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,7 +75,7 @@ class DaftarState extends State<Daftar> {
                             height: 10,
                             child: LinearProgressIndicator(
                               borderRadius: BorderRadius.circular(10),
-                              value: 0.5,
+                              value: 1,
                               backgroundColor: Colors.grey,
                               minHeight: 10,
                               valueColor: AlwaysStoppedAnimation(Warna().biru),
@@ -69,7 +85,7 @@ class DaftarState extends State<Daftar> {
                         SizedBox(
                           width: 8,
                         ),
-                        Expanded(flex: 2, child: Text("Langkah 1/2")),
+                        Expanded(flex: 2, child: Text("Langkah 2/2")),
                       ],
                     ),
                     Padding(
@@ -114,142 +130,16 @@ class DaftarState extends State<Daftar> {
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 32),
                       child: Text(
-                        "1. Data Pribadi",
+                        "2. Upload KTP",
                         style: TextStyle(
                             fontSize: 16,
                             color: Colors.black,
                             fontWeight: FontWeight.w700),
                       ),
                     ),
-                    Text("Nama Lengkap",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                        )),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                        hintText: 'ex. John Doe',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Warna().biru),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Text("Jenis Kelamin",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                        )),
-                    DropdownButtonFormField<String>(
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide:
-                                BorderSide(width: 1, color: Color(0xFFD9D9D9)),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide:
-                                BorderSide(width: 1, color: Color(0xFFD9D9D9)),
-                          ),
-                        ),
-                        dropdownColor: Colors.white,
-                        elevation: 8,
-                        isExpanded: true,
-                        value: jenisKelamin, // Nilai yang dipilih saat ini
-                        hint: Text(
-                            'Pilih Opsi'), // Placeholder jika belum ada yang dipilih
-                        onChanged: (newValue) {
-                          setState(() {
-                            jenisKelamin = newValue!;
-                            print(jenisKelamin);
-                          });
-                        },
-                        items: [
-                          DropdownMenuItem<String>(
-                            value: "Wanita",
-                            child: Text("Wanita"),
-                          ),
-                          DropdownMenuItem<String>(
-                            value: "Pria",
-                            child: Text("Pria"),
-                          ),
-                        ]),
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Text("Email",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                        )),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                        hintText: 'ex. JohnDoe@gmail.com',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        prefixIconColor: Colors.grey,
-                        prefixIcon: Icon(Icons.email),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Warna().biru),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 32,
-                    ),
                     Row(
                       children: [
-                        Text("No Telp",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                            )),
-                        Text("*",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.red,
-                              fontWeight: FontWeight.w700,
-                            )),
-                      ],
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                        prefixIcon: Icon(Icons.phone),
-                        prefixIconColor: Colors.grey,
-                        hintText: 'ex. +62 81234567890',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Warna().biru),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Row(
-                      children: [
-                        Text("Alamat",
+                        Text("Nomor Induk KTP",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 12,
@@ -269,13 +159,74 @@ class DaftarState extends State<Daftar> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(borderSide: BorderSide.none),
                         hintText: 'ex. John Doe',
-                        prefixIcon: Icon(Icons.location_on_outlined),
-                        prefixIconColor: Colors.grey,
                         hintStyle: TextStyle(color: Colors.grey),
                         filled: true,
                         fillColor: Colors.grey[200],
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Warna().biru),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 32,
+                    ),
+                    Row(
+                      children: [
+                        Text("Upload Foto KTP",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                            )),
+                        Text("*",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.red,
+                              fontWeight: FontWeight.w700,
+                            )),
+                      ],
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        final im.XFile? photo = await image.pickImage(
+                            source: im.ImageSource.camera);
+
+                        if (photo != null) {
+                          print("Berhasil Pick Foto");
+                          print(photo.path);
+                          Uint8List pickedImageBytes =
+                              await photo.readAsBytes();
+                          if (pickedImageBytes != null) {
+                            pickedImage =
+                                await testComporessList(pickedImageBytes);
+                            setState(() {
+                              photoTaken = true;
+                            });
+                          }
+                        }
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        color: Colors.grey[200],
+                        padding: EdgeInsets.all(16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              photoTaken
+                                  ? "Foto Telah Diambil"
+                                  : "Tidak Ada Foto",
+                              style: TextStyle(
+                                color: Colors.grey[500],
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Icon(Icons.camera_alt),
+                          ],
                         ),
                       ),
                     ),
@@ -283,10 +234,7 @@ class DaftarState extends State<Daftar> {
                       height: 64,
                     ),
                     InkWell(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Daftar2()));
-                      },
+                      onTap: () {},
                       child: Container(
                           padding: EdgeInsets.all(16),
                           width: double.infinity,
