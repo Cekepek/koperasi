@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart' as im;
 import 'package:koperasi/class/warna.dart';
+import 'package:koperasi/screen/daftar3.dart';
 
 class Daftar2 extends StatefulWidget {
   @override
@@ -234,7 +235,16 @@ class Daftar2State extends State<Daftar2> {
                       height: 64,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        if (!photoTaken) {
+                          print("Blom ambil foto");
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Daftar3()));
+                        }
+                      },
                       child: Container(
                           padding: EdgeInsets.all(16),
                           width: double.infinity,
