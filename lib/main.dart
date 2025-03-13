@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:koperasi/screen/anggota.dart';
 import 'package:koperasi/screen/dashboard.dart';
+import 'package:koperasi/screen/koperasi.dart';
 import 'package:koperasi/screen/login.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
         fontFamily: 'Montserrat',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -39,12 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> _buildScreens() {
     return [
       Dashboard(),
-      Center(
-        child: Text("ANGGOTA"),
-      ),
-      Center(
-        child: Text("KOPERASI"),
-      ),
+      Anggota(),
+      Koperasi(),
       Center(
         child: Text("UNIT BISNIS"),
       ),
